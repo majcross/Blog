@@ -48,4 +48,15 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo('App\Models\Role');
     }
+
+    
+    /**
+     * Get the photo that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function photo(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\Photo');
+    }
 }

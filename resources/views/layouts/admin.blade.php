@@ -119,6 +119,12 @@
                     <li>
                         <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
+                    <li>
+                        <a href="{{ route('user.index') }}"  ><i class="fa fa-wrench fa-fw"></i>All Users</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.create') }}"  ><i class="fa fa-wrench fa-fw"></i>Create Users</a>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
