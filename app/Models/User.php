@@ -55,7 +55,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function photo(): BelongsTo
+    public function photo()
     {
         return $this->belongsTo('App\Models\Photo');
     }
