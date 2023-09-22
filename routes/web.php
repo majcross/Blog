@@ -24,8 +24,16 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('admin/user', AdminUsersController::Class);
+
 
 Route::get('/admin', function(){
     return view('admin.index');
 });
+
+Route::group(['middleware'=>'admin'], function(){
+
+    Route::resource('admin/user', AdminUsersController::Class);
+
+    Route::resource('admin/user', AdminPostsController::Class);
+});
+

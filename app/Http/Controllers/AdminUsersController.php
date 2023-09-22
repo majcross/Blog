@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\User;
@@ -45,7 +46,7 @@ class AdminUsersController extends Controller
     {
         //
         if (trim($request->password) == '') {
-            $input = $request->except('password')
+            $input = $request->except('password');
         } else {
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
@@ -108,7 +109,7 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         // return $request->all();
         if (trim($request->password) == '') {
-            $input = $request->except('password')
+            $input = $request->except('password');
         } else {
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
@@ -138,5 +139,11 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        unlink(public_path() . $user->photo->file);
+        $user->delete();
+        Session()->flash('delete_user', 'The user has been deleted');
+        
+        return redirect('admin/user');
     }
 }
