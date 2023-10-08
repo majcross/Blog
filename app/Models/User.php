@@ -67,6 +67,16 @@ class User extends Authenticatable
     //     }
     // }
 
+    /**
+     * Get all of the post for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function post()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+
     public function isAdmin(){
         if($this->role->name == "administrator" && $this->is_active == 1){
             return true;

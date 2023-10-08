@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminCategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminPostsController;
+// use App\Http\Controllers\AdminMediaPhotosContoller;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +35,15 @@ Route::get('/admin', function(){
 
 Route::group(['middleware'=>'admin'], function(){
 
-    Route::resource('admin/user', AdminUsersController::Class);
+    Route::resource('admin/user', AdminUsersController::class);
 
-    Route::resource('admin/user', AdminPostsController::Class);
+    Route::resource('admin/post', AdminPostsController::class);
+
+    Route::resource('admin/categories', AdminCategoriesController::class);
+
+    // Route::resource('admin/media', AdminMediaPhotoController::Class);
+
+    // Route::get('admin/media/upload',['as'=>'admin.media.upload', 'uses'=> 'AdminMediaPhotosContoller@store']);
+
 });
 
