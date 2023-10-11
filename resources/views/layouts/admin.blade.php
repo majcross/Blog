@@ -145,18 +145,19 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/users">All Users</a>
-                            </li>
+                        <a href="{{ route('categories.index') }}">All Categories</a>
+                    </li>
 
-                            <li>
-                                <a href="/users/create">Create User</a>
-                            </li>
+                    <li>
+                        <a href="{{ route('categories.create') }}">Create Category</a>
+                    </li>
 
-                        </ul>
-                        <!-- /.nav-second-level -->
+                    <li>
+                        <a href="{{ route('media.index')}}">All Media</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('media.upload')}}">Upload Media</a>
                     </li>
 
                     <li>

@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminCategoriesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminMediaController;
 use App\Http\Controllers\AdminPostsController;
-// use App\Http\Controllers\AdminMediaPhotosContoller;
+use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminMediasController;
+use App\Http\Controllers\AdminMediaAllController;
+use App\Http\Controllers\AdminCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +43,11 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::resource('admin/categories', AdminCategoriesController::class);
 
-    // Route::resource('admin/media', AdminMediaPhotoController::Class);
+    Route::resource('admin/media', AdminMediasController::class);
 
-    // Route::get('admin/media/upload',['as'=>'admin.media.upload', 'uses'=> 'AdminMediaPhotosContoller@store']);
+    Route::get('admin/media', [AdminMediasController::class, 'index'])->name('media.index');
+
+    Route::get('admin/media/upload',['as'=>'media.upload', 'uses'=> [AdminMediasController::class, 'store']]);
 
 });
 

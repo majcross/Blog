@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\PostsCreateRequest;
+use App\Http\Requests\PostCreateRequest;
 use App\Models\Category;
 
 class AdminPostsController extends Controller
@@ -42,7 +42,7 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostsCreateRequest $request)
+    public function store(PostCreateRequest $request)
     {
         //
         $input = $request->all();
