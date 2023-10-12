@@ -45,9 +45,9 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::resource('admin/media', AdminMediasController::class);
 
-    Route::get('admin/media', [AdminMediasController::class, 'index'])->name('media.index');
+    // Route::get('admin/media', [AdminMediasController::class, 'index'])->name('media.index');
 
-    Route::get('admin/media/upload',['as'=>'media.upload', 'uses'=> [AdminMediasController::class, 'store']]);
+    // Route::get('admin/media/upload',['as'=>'media.upload', 'uses'=> [AdminMediasController::class, 'store']]);
 
 });
 
