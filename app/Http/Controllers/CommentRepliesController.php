@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentReply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentRepliesController extends Controller
 {
@@ -35,6 +37,30 @@ class CommentRepliesController extends Controller
     public function store(Request $request)
     {
         //
+        // return "It working";
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function createReply(Request $request)
+    {
+        $user = Auth::user();
+        $data = [
+            'comment_id' => $request->comment_id,
+            'author' => $user->name,
+            'email' => $user->email,
+            'photo' => $user->photo->file,
+            'body' => $request->body
+        ];
+        CommentReply::create($data);
+        $request->session()->flash('replies', 'Message Delivered');
+        return redirect()->back();
+
+        // return "It was working";
     }
 
     /**

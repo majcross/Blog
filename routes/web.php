@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/post/{id}', [AdminPostsController::class, 'post']);
+Route::get('/post/{id}', [AdminPostsController::class, 'post'])->name('home.post');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -50,6 +50,8 @@ Route::group(['middleware'=>'admin'], function(){
     Route::resource('admin/comments', PostCommentsController::class);
 
     Route::resource('admin/comment/replies', CommentRepliesController::class);
+
+    Route::get('admin/comment/data', [CommentRepliesController::class, 'createReply'])->name('replies.createReply');
 
     // Route::get('admin/media', [AdminMediasController::class, 'index'])->name('media.index');
 

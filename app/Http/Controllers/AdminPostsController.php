@@ -132,6 +132,9 @@ class AdminPostsController extends Controller
 
     public function post($id)
     {
-        return "Working";
+        // return "It working";
+        $post = Post::findOrFail($id);
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post', 'comments'));
     }
 }

@@ -14,7 +14,8 @@ class Comment extends Model
         'author',
         'email',
         'body',
-        'is_active'
+        'is_active',
+        'photo'
     ];
 
     /**
@@ -25,5 +26,15 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany('App\Models\CommentReply');
+    }
+
+    /**
+     * Get the post that owns the Comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function post()
+    {
+        return $this->belongsTo('App\Models\Post');
     }
 }
