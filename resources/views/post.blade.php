@@ -78,42 +78,51 @@
 
                                 @if (count($comment->replies) > 0)
                                     @foreach ($comment->replies as $reply)
+                                    @if ($reply->is_active == 1)
+                                        
 
-                                        <div class="media">
+                                        <div id="nested-comment" class="media">
                                             <a class="pull-left" href="#">
                                                 <img height="50" width="100" src="{{ $reply->photo}}" alt="">
                                             </a>
                                             <div class="media-body">
-                                                <h4 class="media-heading">{{ $reply->author }}
+                                                <h4 class="media-heading">{{ $reply->author }} 
+                                                    <h2>shdsgh</h2>
                                                     <small>{{ $reply->created_at->diffForHumans() }}</small>
                                                 </h4>
-                                                {{ $reply->body }}
-                                                </div>
+                                                sjsjj
+                                                <p>{{ $reply->body }}</p>
+                                                contesss
+                                            </div>
                                                 <div class="comment-reply-container">
-                                                    <button class="toggle-reply btn btn-primary pull-right">Reply</button>
+                                                    <p>content</p>
+                                                    <button class=" btn btn-primary pull-right">Reply</button>
                                                     <div class="comment-reply col-sm-6">
                                                         {!! Form::open(['method'=>'POST', 
-                                                            'action'=>'App\Http\Controllers\CommentRepliesController@createReply', 
-                                                            'files'=>true]) !!}
-                                                            {{ csrf_field() }}
-                                                            <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                                                            <div class="form-group">
-                                                                {!! Form::label('body', 'Reply') !!}
-                                                                {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3]) !!}
-                                                            </div>
+                                                                'action'=>'App\Http\Controllers\CommentRepliesController@createReply', 
+                                                                'files'=>true]) !!}
+                                                                <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                                        <div class="form-group">
+                                                            {!! Form::label('body', 'Reply') !!}
+                                                            {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3]) !!}
+                                                        </div>
 
-                                                    <div class="form-group">
+                                                        <div class="form-group">
 
-                                                        {!! Form::submit('Post', ['class'=>'btn btn-primary']) !!}
+                                                            {!! Form::submit('Post', ['class'=>'btn btn-primary']) !!}
 
+                                                        </div>
+                                                        {!! Form::close() !!}                                        
                                                     </div>
-                                                    {!! Form::close() !!}                                        
                                                 </div>
-                                        </div>
+                                        
                                     </div>
+                                    
+                                    @endif
                                         
                                     @endforeach
-                                    
+                                    @else
+                                    <h2>No replies</h2>
                                 @endif
 
                                 

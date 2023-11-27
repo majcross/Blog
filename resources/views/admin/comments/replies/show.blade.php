@@ -2,8 +2,8 @@
 
 @section('content')
 
-    @if (count($comments) > 0)
-    <h1>Comment Page</h1>
+    @if ($replies)
+    <h1>Reply Page</h1>
     <table class="table">
         <thead>
             <tr>
@@ -17,20 +17,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($comments as $comment)
-                <tr>
-                    <td>{{$comment->id}}</td>
-                    <td>{{$comment->author}}</td>
-                    <td>{{$comment->email}}</td>
-                    <td>{{ Str::limit($comment->body, 10, '...')}}</td>
-                    <td>{{$comment->created_at}}</td>
-                    <td><a href="{{route('home.post', $comment->post_id )}}">View Post</a></td>
-                    <td><a href="{{route('replies.show', $comment->id )}}">View Replies</a></td>
+            @foreach ($replies as $reply)
+                @if (count($replies) > 0)
                     
+                
+                <tr>
+                    
+
+                    <td>{{$reply->id}}</td>
+                    <td>{{$reply->author}}</td>
+                    <td>{{$reply->email}}</td>
+                    <td>{{ Str::limit($reply->body, 10, '...')}}</td>
+                    <td>{{$reply->created_at}}</td>
+                    <td><a href="{{route('home.post', $reply->comment->post_id )}}">View Post</a></td>
                     <td>
-                        @if ($comment->is_active == 1)
+                        @if ($reply->is_active == 1)
                         {!! Form::open(['method'=>'PATCH', 
-                        'action'=> ['App\Http\Controllers\PostCommentsController@update', $comment->id]]) !!}
+                        'action'=> ['App\Http\Controllers\CommentRepliesController@update', $reply->id]]) !!}
 
                         <input type="hidden" name="is_active" value="0">
                         <div class="form-group">
@@ -39,7 +42,7 @@
                         {!! Form::close() !!}
                         @else
                         {!! Form::open(['method'=>'PATCH', 
-                        'action'=> ['App\Http\Controllers\PostCommentsController@update', $comment->id]]) !!}
+                        'action'=> ['App\Http\Controllers\CommentRepliesController@update', $reply->id]]) !!}
 
                         <input type="hidden" name="is_active" value="1">
                         <div class="form-group">
@@ -50,21 +53,26 @@
                     </td>
                     <td>
                         {!! Form::open(['method'=>'DELETE', 
-                        'action'=> ['App\Http\Controllers\PostCommentsController@update', $comment->id]]) !!}
+                        'action'=> ['App\Http\Controllers\CommentRepliesController@destroy', $reply->id]]) !!}
                         <div class="form-group">
                             {!! Form::submit('Delete ', ['class'=>'btn btn-danger']) !!}
                         </div>
                         {!! Form::close() !!} 
                     </td>
+                                            
+                    
                 </tr>
-            @endforeach
-           
+                @else
+                    <h1 class="text-center">No Replies</h1>
+                @endif
+                @endforeach
         </tbody>
     </table>
+    
 
     @else
-        <h1 class="bg bg-danger text-center">No Comments</h1>
-    @endif
-
+        <h1 class="bg bg-danger text-center">No replies</h1>
+    
+        @endif
     
 @endsection
