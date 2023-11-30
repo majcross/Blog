@@ -90,7 +90,6 @@
                                                     <h2>shdsgh</h2>
                                                     <small>{{ $reply->created_at->diffForHumans() }}</small>
                                                 </h4>
-                                                sjsjj
                                                 <p>{{ $reply->body }}</p>
                                                 contesss
                                             </div>

@@ -20,7 +20,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
+        $posts = Post::paginate(1);
         return view('admin.post.index',compact('posts'));
     }
 
@@ -130,10 +130,11 @@ class AdminPostsController extends Controller
         return redirect('admin/post');
     }
 
-    public function post($id)
+    public function post($slug)
     {
         // return "It working";
-        $post = Post::findOrFail($id);
+        // $post = Post::findBySlugOrFail($slug);
+        $post = Post::where('slug',$slug)->firstOrFail();
         $comments = $post->comments()->whereIsActive(1)->get();
         return view('post', compact('post', 'comments'));
     }
